@@ -3,14 +3,26 @@ import numpy as np
 import os
 from datetime import datetime
 
-if not os.path.exists('data/up_move'):
-    os.makedirs('data/up_move')
-if not os.path.exists('data/down_move'):
-    os.makedirs('data/down_move')
-if not os.path.exists('data/no_move'):
-    os.makedirs('data/no_move')
+up_move_dir = 'data/up_move'
+down_move_dir = 'data/down_move'
+no_move_dir = 'data/no_move'
 
-video_path = "test/test0.mp4"
+if not os.path.exists(up_move_dir):
+    os.makedirs(up_move_dir)
+if not os.path.exists(down_move_dir):
+    os.makedirs(down_move_dir)
+if not os.path.exists(no_move_dir):
+    os.makedirs(no_move_dir)
+
+down_move_files = os.listdir(down_move_dir)
+no_move_files = os.listdir(no_move_dir)
+up_move_files = os.listdir(up_move_dir)
+
+up_move_index = len(up_move_files)
+no_move_index = len(no_move_files)
+down_move_index = len(down_move_files)
+
+video_path = "test/test8.mp4"
 capture = cv2.VideoCapture(video_path)
 
 _, frame1 = capture.read()
@@ -43,17 +55,19 @@ while True:
     elif kk == ord('p'):
         pause = not pause
     elif kk == ord('u'):
-        filename = f"data/up_move/{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+        filename = f"data/up_move/up_move_" + str(up_move_index) + ".png"
         cv2.imwrite(filename, rgb_representation)
-        print(f"Saved frame as {filename}")
+        up_move_index += 1
+
     elif kk == ord('d'):
-        filename = f"data/down_move/{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+        filename = "data/down_move/down_move_" + str(down_move_index) + ".png"
         cv2.imwrite(filename, rgb_representation)
-        print(f"Saved frame as {filename}")
+        down_move_index += 1
+        
     elif kk == ord('n'):
-        filename = f"data/no_move/{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+        filename = "data/no_move/no_move_" + str(no_move_index) + ".png"
         cv2.imwrite(filename, rgb_representation)
-        print(f"Saved frame as {filename}")
+        no_move_index += 1
 
 
     prvs = next
