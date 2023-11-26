@@ -22,7 +22,7 @@ up_move_index = len(up_move_files)
 no_move_index = len(no_move_files)
 down_move_index = len(down_move_files)
 
-video_path = "test/test8.mp4"
+video_path = "test/test.mov"
 capture = cv2.VideoCapture(video_path)
 
 _, frame1 = capture.read()
